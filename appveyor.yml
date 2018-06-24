@@ -14,7 +14,7 @@ build:
 notifications:
 - provider: Slack
   incoming_webhook: 
-    secure: 9v4gnDq4zFsnuGmkFNe7wN3KHW+DtMmvh2xyjLwUaz5VfdtNrhv10Xf87Eqav+lGrhEEprW6JbFEEeaHmOdVDFv8J0QV7qZeJzQuWmHuS1M=
+    secure: 9v4gnDq4zFsnuGmkFNe7wN3KHW+DtMmvh2xyjLwUaz4raV7flzsuVnNYmWb28eDSVTbliLh8ukPGgLvFXWhCzTXBgPnp6n2aQrr62r3gYHc=
   channel: airelogic-test
   on_build_success: true
   on_build_failure: true
