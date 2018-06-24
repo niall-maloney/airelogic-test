@@ -1,0 +1,22 @@
+[
+    {
+        "assignee": 0,
+        "assignee_name": "Unassigned",
+        "short_description": "first summary",
+        "long_description": "first description",
+        "opened": "2018-06-24T10:00:00",
+        "status": "Open",
+        "self_link": "/api/issues/1",
+        "id": 1
+    },
+    {
+        "assignee": 0,
+        "assignee_name": "Unassigned",
+        "short_description": "second summary",
+        "long_description": "second description",
+        "opened": "2018-06-24T10:00:00",
+        "status": "Open",
+        "self_link": "/api/issues/2",
+        "id": 2
+    }
+]

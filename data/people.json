@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Unassigned",
+        "self_link": "/api/people/0",
+        "id": 0
+    },
+    {
+        "name": "Person",
+        "self_link": "/api/people/1",
+        "id": 1
+    }
+]

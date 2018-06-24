@@ -1,0 +1,96 @@
+﻿@{
+    ViewData["Title"] = "People";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h4>People</h4></div>
+            <div class="panel-body">
+                <table class="table table-hover" id="table-people">
+                    <thead>
+                        <tr>
+                            <th class="col-md-12">Name</th>
+                            <th class="col-md"></th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var person in (PersonViewModel[])ViewData["People"])
+                        {
+                            <tr>
+                                <td class="col-md-12">@person.FirstName @person.LastName</td>
+                                <td><a asp-action="edit" asp-route-id="@person.Uuid" class="btn btn-default" role="button">Edit</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8 order-md-1">
+        <div class="panel panel-default">
+        <div class="panel-heading"><h4>Create new person</h4></div>
+            <div class="panel-body">
+                <div class="col-md-12 order-md-1">
+                    <div class="row">
+                        <form class="needs-validation" action="">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="firstName">First name</label>
+                                        <input type="text" class="form-control" id="firstName" placeholder="First name..." value="" required="">
+                                        <!-- <div class="invalid-feedback">Valid first name is required.</div> -->
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="lastName">Last name</label>
+                                        <input type="text" class="form-control" id="lastName" placeholder="Last name..." value="" required="">
+                                        <!-- <div class="invalid-feedback">Valid last name is required.</div> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pull-right">
+                                <button type="submit" class="btn btn-default" id="button-create">Create</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script>
+    $("form").on('submit',function(e){
+        e.preventDefault();
+        
+        var firstName = $("input#firstName").val();
+        var lastName = $("input#lastName").val();
+
+        var request = { first_name : firstName, last_name : lastName };
+
+        $.ajax({
+            type: "POST",
+            headers: { "Content-Type": "application/json" },
+            data: JSON.stringify(request),
+            url: '@Url.Action("people", "api")',
+            success: function (result) {
+                var data = result.results[0];
+                var opened = moment(data.opened).format("DD MMM YYYY");
+                $("#table-people tr:last").after("<tr><td>" + 
+                    data.first_name + " " + data.last_name + "</td><td><a class=\"btn btn-default\" role=\"button\" href=\"/people/edit/" +
+                    data.id + "\">Edit</a></td></tr>");
+
+                    $("input#firstName").val("")
+                    $("input#lastName").val("");
+            }
+        });
+    });
+    </script>
+
+}

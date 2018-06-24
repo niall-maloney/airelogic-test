@@ -1,0 +1,72 @@
+@{
+    ViewData["Title"] = "Edit person";
+
+    var person = (PersonViewModel)ViewData["Person"];
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h4>Edit person</h4></div>
+            <div class="panel-body">
+                <div class="col-md-12 order-md-1">
+                <div class="row">
+                    <form class="needs-validation">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="col-md-6">
+                                        <label for="firstName">First name</label>
+                                        <input type="text" class="form-control" id="firstName" value="@person.FirstName" default="@person.FirstName" required="true"></input>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="lastName">Last name</label>
+                                        <input type="text" class="form-control" id="lastName" value="@person.LastName" default="@person.LastName" required="true"></input>
+                                    </div>
+                                </div>
+                            </div>
+                        </div></br>
+                        <div class="col-md-12">
+                            <div class="pull-right">
+                                <button type="submit" class="btn btn-default" id="button-update">Update</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+  </div>
+
+@section Scripts {
+
+    <script>
+        $("form").on('submit',function(e){
+            e.preventDefault();
+
+            var firstName = $("input#firstName").val();
+            var lastName = $("input#lastName").val();
+
+            if(firstName === $("input#firstName").prop("defaultValue") && 
+               lastName === $("input#lastName").prop("defaultValue")){
+                return;
+            }
+
+            var request = { first_name : firstName, last_name : lastName };
+
+            $.ajax({
+                type: "Put",
+                headers: { "Content-Type": "application/json" },
+                data: JSON.stringify(request),
+                url: '@Url.Action("people", "api")/@person.Uuid',
+                success: function (result) {
+                    location.href = '@Url.Action("index", "people")';
+                }
+            });
+        });
+
+        $(".form :input").change(function() {
+            $(".form").data("changed",true);
+        });
+    </script>
+
+}

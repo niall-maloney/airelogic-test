@@ -1,0 +1,22 @@
+version: 1.0.{build}
+image: ubuntu
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: '{version}'
+  package_version: '{version}'
+  assembly_version: '{version}'
+  file_version: '{version}'
+  informational_version: '{version}'
+build:
+  project: AireLogic.sln
+  verbosity: minimal
+  configuration: Release
+notifications:
+- provider: Slack
+  incoming_webhook: 
+    secure: 9v4gnDq4zFsnuGmkFNe7wN3KHW+DtMmvh2xyjLwUaz5VfdtNrhv10Xf87Eqav+lGrhEEprW6JbFEEeaHmOdVDFv8J0QV7qZeJzQuWmHuS1M=
+  channel: airelogic-test
+  on_build_success: true
+  on_build_failure: true
+  on_build_status_changed: true

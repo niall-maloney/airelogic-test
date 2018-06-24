@@ -1,0 +1,24 @@
+#Global
+bin/
+obj/
+
+# Visual Studio 2017
+.vs/
+*.user
+
+# ReSharper 
+*.DotSettings.user
+*.DotSettings
+
+# VS Code
+.vscode
+*.userprefs
+
+# Rider
+.idea
+
+# macOS specific
+.DS_Store
+
+# docker-compose
+.env
