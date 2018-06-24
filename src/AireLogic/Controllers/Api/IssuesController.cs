@@ -14,7 +14,7 @@ namespace AireLogic.Controllers.Api
     [Route("api/[controller]")]
     public class IssuesController : Controller
     {
-        IIssueRepository _issueRepository;
+        private readonly IIssueRepository _issueRepository;
 
         public IssuesController(IIssueRepository issueRepository)
         {
@@ -43,7 +43,10 @@ namespace AireLogic.Controllers.Api
                 var data = await _issueRepository.GetBugSingle(id, ct);
 
                 // return not found if data is null
-                if(data == null) return NotFound();
+                if (data == null)
+                {
+                    return NotFound();
+                }
 
                 // map model to response dto
                 var result = Mapper.Map<IssueDto>(data);
@@ -76,7 +79,7 @@ namespace AireLogic.Controllers.Api
                 var result = Mapper.Map<IssueDto>(toAdd);
 
                 // return created response
-                return Created($"/api/bugs/{result.Uuid}", new SuccessResult { Results = new[] { result }, Status = "Successful" });
+                return Created($"/api/bugs/{data}", new SuccessResult { Results = new[] { result }, Status = "Successful" });
             }
             catch (ArgumentException ex)
             {
@@ -90,14 +93,19 @@ namespace AireLogic.Controllers.Api
             try
             {
                 // return non content response if item is null
-                if (item == null) return NoContent();
+                if (item == null)
+                {
+                    return NoContent();
+                }
 
                 // retrieve the issue that is going to be updated
                 var original = await _issueRepository.GetBugSingle(id, ct);
 
                 // return not found response if existing item cannot be found
                 if (original == null)
+                {
                     return NotFound();
+                }
 
                 var originalStatus = original.Status;
 

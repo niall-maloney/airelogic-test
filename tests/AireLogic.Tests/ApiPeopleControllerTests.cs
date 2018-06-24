@@ -15,7 +15,7 @@ namespace AireLogic.Tests
 {
     public class ApiPeopleControllerTests
     {
-        private CancellationTokenSource _cts = new CancellationTokenSource();
+        private readonly CancellationTokenSource _cts = new CancellationTokenSource();
         private PeopleController _controller;
         private IPersonRepository _mockRepo;
 

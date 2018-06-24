@@ -14,7 +14,7 @@ namespace AireLogic.Controllers.Api
     public class PeopleController : Controller
     {
         IPersonRepository _personRepository;
-        
+
         public PeopleController(IPersonRepository personRepository)
         {
             _personRepository = personRepository;
@@ -42,7 +42,10 @@ namespace AireLogic.Controllers.Api
                 var data = await _personRepository.GetPersonSingle(id, ct);
 
                 // return not found if data is null
-                if(data == null) return NotFound();
+                if (data == null)
+                {
+                    return NotFound();
+                }
 
                 // map model to response dto
                 var result = Mapper.Map<PersonDto>(data);
@@ -74,7 +77,7 @@ namespace AireLogic.Controllers.Api
                 var result = Mapper.Map<PersonDto>(toAdd);
 
                 // return created response
-                return Created($"/api/people/{result.Uuid}", new SuccessResult { Results = new[] { result }, Status = "Successful" });
+                return Created($"/api/people/{data}", new SuccessResult { Results = new[] { result }, Status = "Successful" });
             }
             catch (ArgumentException ex)
             {
@@ -88,17 +91,25 @@ namespace AireLogic.Controllers.Api
             try
             {
                 // return non content response if item is null
-                if (item == null) return NoContent();
+                if (item == null)
+                {
+                    return NoContent();
+                }
 
                 // the 'unassigned' person can not be edited
-                if (id <= 0) return Forbid("You can't edit this person");
+                if (id <= 0)
+                {
+                    return Forbid("You can't edit this person");
+                }
 
                 // retrieve the person that is going to be updated
                 var original = await _personRepository.GetPersonSingle(id, ct);
 
                 // return not found response if existing item cannot be found
                 if (original == null)
+                {
                     return NotFound();
+                }
 
                 // map the update dto to model
                 Person toUpdate = Mapper.Map(item, original);
@@ -124,7 +135,10 @@ namespace AireLogic.Controllers.Api
             try
             {
                 // the 'unassigned' person can not be deleted
-                if (id <= 0) return Forbid("You can't delete this person");
+                if (id <= 0)
+                {
+                    return Forbid("You can't delete this person");
+                }
 
                 // retrieve the person that is going to be updated
                 var data = await _personRepository.GetPersonSingle(id, ct);
@@ -150,7 +164,10 @@ namespace AireLogic.Controllers.Api
             try
             {
                 // the 'unassigned' person can not be edited
-                if (id <= 0) return Forbid("You can't edit this person");
+                if (id <= 0)
+                {
+                    return Forbid("You can't edit this person");
+                }
 
                 // retrieve the person that is going to be updated
                 var data = await _personRepository.GetPersonSingle(id, ct);

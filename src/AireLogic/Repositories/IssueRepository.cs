@@ -17,25 +17,34 @@ namespace AireLogic.Repositories
             newBug.Uuid = newBug.GetHashCode();
             newBug.SelfLink += $"/{newBug.Uuid}";
 
-            var result = await Task.Run(() => _bugStore.TryAdd(newBug.Uuid, newBug));
+            var result = await Task.Run(() => _bugStore.TryAdd(newBug.Uuid, newBug)).ConfigureAwait(false);
 
-            if (!result) throw new ArgumentException("Duplicate item.");
+            if (!result)
+            {
+                throw new ArgumentException("Duplicate item.");
+            }
 
             return newBug.Uuid;
         }
 
         public async Task DeleteBug(int id, CancellationToken token)
         {
-            var result = await Task.Run(() => _bugStore.TryRemove(id, out var _));
+            var result = await Task.Run(() => _bugStore.TryRemove(id, out var _)).ConfigureAwait(false);
 
-            if (!result) throw new ArgumentException("Item does not exist.");
+            if (!result)
+            {
+                throw new ArgumentException("Item does not exist.");
+            }
         }
 
         public async Task<Issue[]> GetBugAll(CancellationToken token)
         {
-            var issues = await Task.Run(() => { return _bugStore.Values; });
+            var issues = await Task.Run(() => { return _bugStore.Values; }).ConfigureAwait(false);
 
-            if (issues == null) throw new ArgumentException("Item does not exist.");
+            if (issues == null)
+            {
+                throw new ArgumentException("Item does not exist.");
+            }
 
             // order issues by date opened
             var result = issues.OrderByDescending(e => e.DateTimeOpened.Year)
@@ -48,20 +57,26 @@ namespace AireLogic.Repositories
 
         public async Task<Issue> GetBugSingle(int id, CancellationToken token)
         {
-            var result = await Task.Run(() => { return _bugStore.TryGetValue(id, out var bug) ? bug : null; });
+            var result = await Task.Run(() => { return _bugStore.TryGetValue(id, out var bug) ? bug : null; }).ConfigureAwait(false);
 
-            if (result == null) throw new ArgumentException("Item does not exist.");
+            if (result == null)
+            {
+                throw new ArgumentException("Item does not exist.");
+            }
 
             return result;
         }
 
         public async Task UpdateBug(Issue bug, CancellationToken token)
         {
-            var original = await GetBugSingle(bug.Uuid, token);
+            var original = await GetBugSingle(bug.Uuid, token).ConfigureAwait(false);
 
-            var result = await Task.Run(() => _bugStore.TryUpdate(bug.Uuid, bug, original));
+            var result = await Task.Run(() => _bugStore.TryUpdate(bug.Uuid, bug, original)).ConfigureAwait(false);
 
-            if (!result) throw new ArgumentException("Item update failed.");
+            if (!result)
+            {
+                throw new ArgumentException("Item update failed.");
+            }
         }
     }
 }

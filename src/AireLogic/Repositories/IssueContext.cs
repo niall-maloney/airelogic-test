@@ -19,7 +19,7 @@ namespace AireLogic.Repositories
             builder.Entity<Issue>(ConfigureIssue);
         }
 
-        private void ConfigureIssue(EntityTypeBuilder<Issue> builder)
+        private static void ConfigureIssue(EntityTypeBuilder<Issue> builder)
         {
             builder.ToTable("issues");
 
@@ -58,10 +58,5 @@ namespace AireLogic.Repositories
                    .HasColumnName("self_link")
                    .HasMaxLength(50);
         }
-
-        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        // {
-        //     optionsBuilder.UseSqlServer(@"Server=localhost:1433;Database=airelogic;Trusted_Connection=True;");
-        // }
     }
 }

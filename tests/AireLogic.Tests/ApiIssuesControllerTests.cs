@@ -15,7 +15,7 @@ namespace AireLogic.Tests
 {
     public class ApiIssuesControllerTests
     {
-        private CancellationTokenSource _cts = new CancellationTokenSource();
+        private readonly CancellationTokenSource _cts = new CancellationTokenSource();
         private IssuesController _controller;
         private IIssueRepository _mockRepo;
 

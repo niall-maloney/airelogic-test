@@ -14,8 +14,8 @@ namespace AireLogic.Controllers
 {
     public class IssuesController : Controller
     {
-        IIssueRepository _issueRepository;
-        IPersonRepository _personRepository;
+        private readonly IIssueRepository _issueRepository;
+        private readonly IPersonRepository _personRepository;
 
         public IssuesController(IIssueRepository issueRepositroy, IPersonRepository personRepository)
         {
@@ -49,7 +49,10 @@ namespace AireLogic.Controllers
             var people = await _personRepository.GetPersonAll(ct);
             ViewData["People"] = Mapper.Map<PersonViewModel[]>(people);
 
-            if (ViewData["Issue"] == null) return Error();
+            if (ViewData["Issue"] == null)
+            {
+                return Error();
+            }
 
             return View();
         }

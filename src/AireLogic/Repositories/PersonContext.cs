@@ -17,7 +17,7 @@ namespace AireLogic.Repositories
             builder.Entity<Person>(ConfigurePerson);
         }
 
-        private void ConfigurePerson(EntityTypeBuilder<Person> builder)
+        private static void ConfigurePerson(EntityTypeBuilder<Person> builder)
         {
             builder.ToTable("people");
 

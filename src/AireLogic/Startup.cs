@@ -28,8 +28,6 @@ namespace AireLogic
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // services.AddDbContext<IssueContext>(options => options.UseSqlServer(@"Server=127.0.0.1,1433;Database=airelogic;User Id=sa;Password=Passw0rd;"));
-            // services.AddDbContext<PersonContext>(options => options.UseSqlServer(@"Server=127.0.0.1,1433;Database=airelogic;User Id=sa;Password=Passw0rd;"));
             services.AddDbContext<IssueContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
             services.AddDbContext<PersonContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
             services.AddScoped<IPersonRepository, PersonDbRepository>();
