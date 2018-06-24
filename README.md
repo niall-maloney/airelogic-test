@@ -44,7 +44,7 @@ $ docker-compose build
 $ docker-compose up -d
 ```
 
-3. Navigate to https://localhost:8080 in your browser of choice.
+3. Navigate to https://localhost:8080 in your browser of choice. _n.b. it takes ~30s for db container to launch and configure._
 
 ## Using the API
 
