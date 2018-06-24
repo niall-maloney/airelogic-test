@@ -20,6 +20,7 @@ description, and when it was opened
 
 - Logging configuration
 - Production configuration
+- More unit tests
 - Intergration tests
 - Input validator service
 - Move API to seperate project & container
