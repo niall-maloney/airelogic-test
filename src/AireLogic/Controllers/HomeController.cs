@@ -13,11 +13,8 @@ namespace AireLogic.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IPersonRepository _storage;
-
-        public HomeController(IPersonRepository storage)
+        public HomeController()
         {
-            _storage = storage;
         }
 
         public IActionResult Index()

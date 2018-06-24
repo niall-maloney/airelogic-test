@@ -21,34 +21,34 @@ namespace AireLogic.Repositories
             newPerson.Uuid = newPerson.GetHashCode();
             newPerson.SelfLink += $"/{newPerson.Uuid}";
 
-            await _context.People.AddAsync(newPerson, token);
-            await _context.SaveChangesAsync(token);
+            await _context.People.AddAsync(newPerson, token).ConfigureAwait(false);
+            await _context.SaveChangesAsync(token).ConfigureAwait(false);
 
             return newPerson.Uuid;
         }
 
         public async Task DeletePerson(int id, CancellationToken token)
         {
-            var toRemove = await GetPersonSingle(id, token);
+            var toRemove = await GetPersonSingle(id, token).ConfigureAwait(false);
 
             _context.Remove(toRemove);
-            await _context.SaveChangesAsync(token);
+            await _context.SaveChangesAsync(token).ConfigureAwait(false);
         }
 
         public async Task<Person[]> GetPersonAll(CancellationToken token)
         {
-            return await _context.People.ToArrayAsync(token);
+            return await _context.People.ToArrayAsync(token).ConfigureAwait(false);
         }
 
         public async Task<Person> GetPersonSingle(int id, CancellationToken token)
         {
-            return await _context.People.Where(e => e.Uuid == id).FirstOrDefaultAsync(token);
+            return await _context.People.Where(e => e.Uuid == id).FirstOrDefaultAsync(token).ConfigureAwait(false);
         }
 
         public async Task UpdatePerson(Person person, CancellationToken token)
         {
             _context.Update(person);
-            await _context.SaveChangesAsync(token);
+            await _context.SaveChangesAsync(token).ConfigureAwait(false);
         }
     }
 }
