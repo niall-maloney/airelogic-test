@@ -98,7 +98,7 @@ namespace AireLogic.Tests
         [Test]
         public async Task PeopleControllerPost_WithNewPerson_Should_AddPerson()
         {
-            var PersonJson = File.ReadAllText(Path.Combine(".", "Person.json"));
+            var PersonJson = File.ReadAllText(Path.Combine(".", "person.json"));
             var Person = JsonConvert.DeserializeObject<PersonCreateDto>(PersonJson);
 
             var result = await _controller.Post(Person, _cts.Token);
