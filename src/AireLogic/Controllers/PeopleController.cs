@@ -12,7 +12,7 @@ namespace AireLogic.Controllers
 {
     public class PeopleController : Controller
     {
-        IPersonRepository _personRepository;
+        private readonly IPersonRepository _personRepository;
 
         public PeopleController(IPersonRepository storage)
         {
