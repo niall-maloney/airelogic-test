@@ -13,7 +13,7 @@ namespace AireLogic.Controllers.Api
     [Route("api/[controller]")]
     public class PeopleController : Controller
     {
-        IPersonRepository _personRepository;
+        private readonly IPersonRepository _personRepository;
 
         public PeopleController(IPersonRepository personRepository)
         {
