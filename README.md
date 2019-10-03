@@ -1,6 +1,6 @@
 # AireLogic Technical Test
 
-[![Build status](https://ci.appveyor.com/api/projects/status/oxexec6ayttkcgym?svg=true)](https://ci.appveyor.com/project/niall-maloney/airelogic-test)
+[![Build status](https://ci.appveyor.com/api/projects/status/9b70yaiirwgr24m8?svg=true)](https://ci.appveyor.com/project/niall-maloney/airelogic-test)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ef40b19d627d4502a8966a217b3e0c51)](https://www.codacy.com/app/niall-maloney/airelogic-test?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=niall-maloney/airelogic-test&amp;utm_campaign=Badge_Grade)
 
 The aim of this technical test is to implement a simple bug tracker that meets the following requirements:
